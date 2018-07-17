@@ -1,11 +1,12 @@
-CREATE TABLE person
+-- #Created by Hibernate
+/*CREATE TABLE person
 (
   id integer not null,
   name varchar(255) not null,
   location varchar(255),
   birth_date timestamp,
   PRIMARY KEY(id)
-  );
+  );*/
 
 
 INSERT INTO PERSON(ID,NAME,LOCATION,BIRTH_DATE)

@@ -3,6 +3,7 @@ package com.in28minutes.database.databasedemo;
 
 import com.in28minutes.database.databasedemo.entity.Person;
 import com.in28minutes.database.databasedemo.jpa.PersonJpaRepository;
+import com.in28minutes.database.databasedemo.springdata.PersonSpringDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +14,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.util.Date;
 
 
-//@SpringBootApplication
-public class JpaDemoApplication implements CommandLineRunner {
+@SpringBootApplication
+public class SpringDataDemoApplication implements CommandLineRunner {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@Autowired
-	PersonJpaRepository repository;
+	PersonSpringDataRepository repository;
 
 	public static void main(String[] args) {
-		SpringApplication.run(JpaDemoApplication.class, args);
+		SpringApplication.run(SpringDataDemoApplication.class, args);
 	}
 
 	@Override
@@ -31,11 +32,11 @@ public class JpaDemoApplication implements CommandLineRunner {
 
 		logger.info("Finding User 10022 -> {}", repository.findById(10022));
 
-		logger.info("Inserting Dexter Morgan -> {}", repository.insert(
+		logger.info("Inserting Dexter Morgan -> {}", repository.save(
 				new Person("Dexter Morgan", "Miami",
 						new Date())));
 
-		logger.info("Updating Jane Doe to Deborah Morgan -> {}", repository.update(
+		logger.info("Updating Jane Doe to Deborah Morgan -> {}", repository.save(
 				new Person(10022, "Deborah Morgan", "Miami",
 						new Date())));
 

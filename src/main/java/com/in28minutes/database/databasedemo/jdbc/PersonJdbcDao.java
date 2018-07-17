@@ -44,6 +44,13 @@ public class PersonJdbcDao {
                 new BeanPropertyRowMapper<Person>(Person.class));
     }
 
+    public Person findByLikeId(int id) {
+        return jdbcTemplate.queryForObject(
+                "select * from Person where id like ?*",
+                new Object[]{id},
+                new PersonRowMapper());
+    }
+
     public Person findByName(String name) {
         return jdbcTemplate.queryForObject(
                 "select * from Person where name=?",
@@ -61,8 +68,8 @@ public class PersonJdbcDao {
 
     public int updateValues(Person person) {
         return jdbcTemplate.update(
-                "update person set name=?, location=?, birth_date=? " +
-                        "where id =?",
+                "update person set name=?, location=?, birth_date=? "
+                        + "where id =?",
                 new Object[]{person.getName(), person.getLocation(),
                         new Timestamp(person.getBirth_date().getTime()), person.getId()});
     }
@@ -72,6 +79,4 @@ public class PersonJdbcDao {
                 "delete from Person where id=?",
                 new Object[]{id});
     }
-
-
 }
